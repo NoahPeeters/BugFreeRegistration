@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bug Free Registration</title>
+    <style type="text/css">
+      body {
+        margin: 40px auto;
+        max-width: 650px;
+        line-height: 1.6;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Thank you for your registration.</h1>
+      <aside>Please check the result below.</aside>
+    </header>
+
+    <h2>Result:</h2>
+    <p id="result"></p>
+
+    <script>
+        function setResult(message, isSuccessful) {
+            var result = document.getElementById("result");
+            result.innerText = message;
+            if (isSuccessful) {
+                result.style.color = "#33cc33"
+            } else {
+                result.style.color = "#cc3333"
+            }
+        }
+
+        function checkRegistration() {
+            var urlParams = new URLSearchParams(window.location.search);
+
+            if (!urlParams.has('email') || urlParams.get('email') == '') {
+                setResult("You must provide an email!");
+                return;
+            }
+            if (!urlParams.has('password') || urlParams.get('password') == '') {
+                setResult("You must provide a password!");
+                return;
+            }
+            if (!urlParams.has('age') || urlParams.get('age') == '') {
+                setResult("You must provide an age!");
+                return;
+            }
+
+            var email = urlParams.get('email');
+            var password = urlParams.get('password');
+            var age = urlParams.get('age');
+
+            if (password.length < 8) {
+                setResult("Your password must have at least 8 characters");
+                return;
+            }
+
+            var parsedAge = parseInt(age);
+
+            if (isNaN(parsedAge)) {
+                setResult("You must enter a valid age. It must be a number.");
+                return;
+            }
+
+            if (parsedAge <= 16) {
+                setResult("You must be at least 16 years old.");
+                return;
+            }
+
+            setResult("Your registration was successful.", true);
+        }
+
+        checkRegistration()
+    </script>
+</body>
+</html>

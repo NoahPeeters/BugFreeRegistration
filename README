@@ -1,0 +1,9 @@
+# The Bug-Free Signup Form
+
+This project is a simple signup form which opens a second page with some client-side validation. However, there is one bug in the validation code.
+The website checks if the entered age is more than 16. This does not match the description on the root page.
+
+## Background
+
+This page was created as a test page for a university project.
+The goal is to have a website with a simple and reproducable bug to test how easy it is to create a bug ticket with GitLab Issues.
